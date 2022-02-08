@@ -30,5 +30,5 @@
       console.log(unsigned_binary(-1)); // 11111111111111111111111111111111
       console.log(unsigned_binary(256)); // 100000000
       console.log(unsigned_binary(-256)); // 11111111111111111111111100000000
-      console.log(unpacked_bcd(324))
+      console.log(unpacked_bcd(324)) //000000110000001000000100
 
