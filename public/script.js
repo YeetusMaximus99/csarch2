@@ -9,23 +9,41 @@ $(document).ready(function(){
         var signbit;
         var expcont;
         var exp = 0;
+        var significand;
         if (input == '') {
             $('#outputValue').val('No input given.');
             return;
         }
-        while(input.toString().includes('.')){
-            input = input * 10;
+        if(input.toString().includes('e')){
+            var array = input.split('e');
+            significand = parseInt(array[0]);
+            exp = parseInt(array[1]);
+        }
+        else if(input.toString().includes('E')){
+            var array = input.split('E');
+            significand = array[0];
+            exp = array[1];
+        }
+        else{
+            significand = input;
+        }
+        while(significand.toString().includes('.')){
+            significand = significand * 10;
             exp = exp - 1;
-            alert(input)
+        }
+        while(significand.toString().length < 4){
+            significand = significand * 10;
+            exp = exp - 1;
         }
         
-        output = input.toString();
-        tempbcd = output.substring(1);
-        tempMSD = output[0];
+        significand = significand.toString();
+        tempbcd = significand.substring(1);
+        tempMSD = significand[0];
         switch(method) {
             case "option1":
-                console.log('Option1');
+                console.log(tempbcd);
                 tempbcd = densely_fixer(tempbcd);
+                console.log(tempbcd);
                 signbit =get_sign_bit(input);
                 expcont = get_exponent_continuation(exp);
                 $('#outputValue').val(signbit + " " + "(INSERT COMBINATION FIELD HERE) " + expcont + " " + tempbcd)
