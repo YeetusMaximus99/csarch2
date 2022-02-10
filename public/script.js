@@ -3,50 +3,70 @@ $(document).ready(function(){
     $('#convertButton').on('click', function() {
         var input = $('#inputValue').val();
         var method = $('#roundMethod').find(':selected').val();
-        var output;
+        var combifield;
         var tempMSD;
         var tempbcd;
         var signbit;
         var expcont;
         var exp = 0;
         var significand;
+       
+       
         if (input == '') {
             $('#outputValue').val('No input given.');
             return;
         }
-        if(input.toString().includes('e')){
+        let pattern = /e/;
+        console.log(pattern.test(input.toString()));
+        if (pattern.test(input.toString())){
             var array = input.split('e');
             significand = parseInt(array[0]);
             exp = parseInt(array[1]);
+            console.log("exps1");
+            console.log(exp);
         }
-        else if(input.toString().includes('E')){
+        let pattern1 = /E/;
+   
+        if (pattern1.test(input.toString())){
             var array = input.split('E');
-            significand = array[0];
-            exp = array[1];
+            significand = parseInt(array[0]);
+            exp = parseInt(array[1]);
+            console.log("exps2");
+            console.log(exp);
         }
+
         else{
             significand = input;
         }
+        signbit = get_sign_bit(input);
+        if(signbit == 1){
+            significand = significand.substring(1);
+            significand = parseInt(significand);
+     
+        }
+       
         while(significand.toString().includes('.')){
             significand = significand * 10;
             exp = exp - 1;
         }
-        while(significand.toString().length < 4){
+        while(significand.toString().length < 7){
             significand = significand * 10;
             exp = exp - 1;
         }
         
+        
         significand = significand.toString();
-        tempbcd = significand.substring(1);
         tempMSD = significand[0];
+        tempbcd = significand.substring(1);
         switch(method) {
             case "option1":
-                console.log(tempbcd);
+                
                 tempbcd = densely_fixer(tempbcd);
-                console.log(tempbcd);
-                signbit =get_sign_bit(input);
                 expcont = get_exponent_continuation(exp);
-                $('#outputValue').val(signbit + " " + "(INSERT COMBINATION FIELD HERE) " + expcont + " " + tempbcd)
+                
+                combifield = combination_field(expcont,tempMSD);
+                expcont = expcont.substring(2);
+                $('#outputValue').val(signbit + " " + combifield + " " + expcont + " " + tempbcd)
                 break;
             case "option2":
                 console.log('Option2');
@@ -77,12 +97,13 @@ $(document).ready(function(){
 
         navigator.clipboard.writeText(text);
     });
-    
+    /*
     console.log(unsigned_binary(1)); // 1
     console.log(unsigned_binary(-1)); // 11111111111111111111111111111111
     console.log(unsigned_binary(256)); // 100000000
     console.log(unsigned_binary(-256)); // 11111111111111111111111100000000
     console.log(unpacked_bcd(324))
+    */
 });
 
   function add_space(binary){
@@ -128,6 +149,7 @@ function packed_bcd(decimal){
         }
         bcd = bcd + temp;
     }
+    console.log(bcd.toString());
     return bcd.toString();
 }
 
@@ -142,10 +164,18 @@ function get_sign_bit(dec) {
 }
 function get_exponent_continuation(exp){
     var expcon = exp + 101;
-    return unsigned_binary(expcon);
+    expcon = unsigned_binary(expcon);
+    while(expcon.length % 4 !=0){
+        expcon = '0' + expcon;
+    }
+    return expcon;
 }
 function densely_packed(packed){
-   
+    
+    while(packed.length < 12){
+        packed = '0' + packed;
+    }
+    console.log(packed);
     var bcd = ['0', '0', '0', '0','0','0', '0', '0', '0', '0', '0', '0', '0'];
     var checker = [];
     checker = [packed[0], packed[4], packed[8]];
@@ -177,7 +207,7 @@ function densely_packed(packed){
         bcd = '0' + '0' + packed[3] + '1' + '1' + packed[7] + '1' + '1' + '1' + packed[11];
     }
   
-
+    
     return bcd;
 }
 /*Runs main loop to convert INT into a densely packed BCD
@@ -204,4 +234,29 @@ function densely_fixer(decimal){
     }
     return bcd;
 }
-
+function combination_field(exp,sigMSD){
+    
+    
+    var sigbin = unsigned_binary(sigMSD);
+    var combifield;
+    while(sigbin.length < 4){
+        sigbin = '0' + sigbin;
+    }
+    while(exp.length % 4 != 0){
+        exp = '0' + exp;
+    }
+    console.log(sigMSD);
+    if(sigbin[0] == '0'){
+        combifield = exp[0] + exp[1] + sigbin[1] + sigbin[2] + sigbin[3]; 
+    }
+    else if(sigbin[0] == '1' && sigbin[1] == '0' && sigbin[2] == '0'){
+        combifield = '1' + '1' + exp[0] + exp[1] + sigbin[3];
+    }
+    if(combifield == "11110"){
+        return "Infinity";
+    }
+    if(combifield == "11111"){
+        return "NaN";
+    }
+    return combifield;
+}
