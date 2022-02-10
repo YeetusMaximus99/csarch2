@@ -31,12 +31,15 @@ $(document).ready(function(){
     $('#resetButton').on('click', function() {
         $('#inputValue').val('');
         $('#outputValue').val('');
-        $('#roundMethod').find(':selected').val('');
+        $('#roundMethod').val('default');
     });
 
     // Copy text to clipboard
     $('#copyButton').on('click', function() {
         var text = $('#outputValue').val();
+
+        // https://stackoverflow.com/questions/18812948/make-hidden-div-appear-then-fade-away
+        $('.tooltiptext').finish().show().delay(1000).fadeOut("slow");
 
         navigator.clipboard.writeText(text);
     });
