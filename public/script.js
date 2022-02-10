@@ -3,16 +3,32 @@ $(document).ready(function(){
     $('#convertButton').on('click', function() {
         var input = $('#inputValue').val();
         var method = $('#roundMethod').find(':selected').val();
-        
+        var output;
+        var tempMSD;
+        var tempbcd;
+        var signbit;
+        var expcont;
+        var exp = 0;
         if (input == '') {
             $('#outputValue').val('No input given.');
             return;
         }
-
+        while(input.toString().includes('.')){
+            input = input * 10;
+            exp = exp - 1;
+            alert(input)
+        }
+        
+        output = input.toString();
+        tempbcd = output.substring(1);
+        tempMSD = output[0];
         switch(method) {
             case "option1":
                 console.log('Option1');
-                // Function or lines here
+                tempbcd = densely_fixer(tempbcd);
+                signbit =get_sign_bit(input);
+                expcont = get_exponent_continuation(exp);
+                $('#outputValue').val(signbit + " " + "(INSERT COMBINATION FIELD HERE) " + expcont + " " + tempbcd)
                 break;
             case "option2":
                 console.log('Option2');
@@ -108,7 +124,7 @@ function get_sign_bit(dec) {
 }
 function get_exponent_continuation(exp){
     var expcon = exp + 101;
-    return expcon;
+    return unsigned_binary(expcon);
 }
 function densely_packed(packed){
    
