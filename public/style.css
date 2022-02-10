@@ -19,13 +19,22 @@ body { /* for body element */
     display: flex;
 }
 
-#in-out > div {
-    display: inline;
-    width: calc(50% - 9px);
+#in-out-left, #in-out-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: calc(40% - 9px);
     margin: 8px;
 }
 
-#in-out > div > h3 {
+#in-out-middle {
+    width: calc(20% - 16px);
+    padding-top: 8px;
+    margin: 0px 16px;
+    text-align: center;
+}
+
+#in-out > div > h3, #in-out > div > h4 {
     margin: 0;
     margin-bottom: 8px;
 }
@@ -51,7 +60,36 @@ input::-webkit-inner-spin-button {
 #in-out > div > input:focus {
     outline: none;
 }
+
+#roundMethod {
+    display: block;
+    margin: auto;
+    margin-bottom: 16px;
+}
+
+#roundMethod:focus {
+    outline: 0;
+}
+
+#actionButtons {
+    display: flex;
+    justify-content: center;
+    font-size: 32px;
+}
+
+#actionButtons > i {
+    margin: 0 16px;
+}
+
+#actionButtons > i:hover {
+    cursor: pointer;
+}
+
 #in-out-right > input:disabled {
     background: white;
     color: black;
+}
+
+#stepsArea {
+    margin: 8px 16px;
 }

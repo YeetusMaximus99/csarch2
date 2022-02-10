@@ -1,5 +1,39 @@
 $(document).ready(function(){
     // Convert input based on selected method
+    $('#convertButton').on('click', function() {
+        var input = $('#inputValue').val();
+        var method = $('#roundMethod').find(':selected').val();
+        
+        if (input == '') {
+            $('#outputValue').val('No input given.');
+            return;
+        }
+
+        switch(method) {
+            case "option1":
+                console.log('Option1');
+                // Function or lines here
+                break;
+            case "option2":
+                console.log('Option2');
+                // Function or lines here
+                break;
+            case "option3":
+                console.log('Option3');
+                // Function or lines here
+                break;
+            default:
+                console.log('Default');
+                $('#outputValue').val('No rounding method selected.');
+        }
+    });
+
+    $('#resetButton').on('click', function() {
+        $('#inputValue').val('');
+        $('#outputValue').val('');
+        $('#roundMethod').find(':selected').val('');
+    });
+
     // Copy text to clipboard
     $('#copyButton').on('click', function() {
         var text = $('#outputValue').val();
@@ -13,15 +47,6 @@ $(document).ready(function(){
     console.log(unsigned_binary(-256)); // 11111111111111111111111100000000
     console.log(unpacked_bcd(324))
 });
-
-function copyToClipboard() {
-    var text = $('#outputValue').val();
-
-    navigator.clipboard.writeText(text);
-    
-    /* Alert the copied text */
-    alert("Copied the text: " + text);
-  }
 
   function add_space(binary){
     var temp = '';
