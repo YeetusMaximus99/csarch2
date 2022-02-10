@@ -1,5 +1,11 @@
 $(document).ready(function(){
-    $('#copyButton').on('click', copyToClipboard);
+    // Convert input based on selected method
+    // Copy text to clipboard
+    $('#copyButton').on('click', function() {
+        var text = $('#outputValue').val();
+
+        navigator.clipboard.writeText(text);
+    });
     
     console.log(unsigned_binary(1)); // 1
     console.log(unsigned_binary(-1)); // 11111111111111111111111111111111
