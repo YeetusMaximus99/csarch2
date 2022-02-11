@@ -29,8 +29,7 @@ $(document).ready(function(){
             significand = array[0];
             console.log(significand);
             exp = parseInt(array[1]);
-            console.log("exps1");
-            console.log(exp);
+           
         }
         
         else if (pattern1.test(input.toString())){
@@ -38,8 +37,7 @@ $(document).ready(function(){
             significand = parseInt(array[0]);
             console.log(array[0]);
             exp = parseInt(array[1]);
-            console.log("exps2");
-            console.log(exp);
+         
         }
 
         else{
@@ -53,31 +51,35 @@ $(document).ready(function(){
      
         }
 
-        console.log(significand);
-        var i;
+        
+
+        var i= 0;
         var array;
+        var temp;
+        exp = parseInt(exp);
         while(significand.toString().includes('.')){
-            if(i < 8){
+            temp = significand.toString();
+            temp = temp.split('.');
+            temp = temp[0].length;
+            if(temp < 7){
             significand = significand * 10;
-            console.log(significand);
             exp = exp - 1;
-            i++;
             }
             else{
                 significand = significand.toString();
                 array=significand.split('.');
                 significand = array[0];
                 console.log(array[1]);
-                significand = significand.concat(array[1]);
             }
         }
-        
         
         while(significand.toString().length < 7){
             significand = significand * 10;
             exp = exp - 1;
+            
         }
         
+       
         /*5.673459e6*/
         significand = significand.toString();
         tempMSD = significand[0];
