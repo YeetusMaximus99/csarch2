@@ -11,6 +11,7 @@
 
         <!-- css files -->
         <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <link rel="stylesheet" type="text/css" href="./css/tooltip.css">
 
         <!-- Font Awesome icon library -->
         <script src="https://kit.fontawesome.com/77b56ec5f8.js" crossorigin="anonymous"></script>
@@ -20,35 +21,33 @@
 
         <!-- scripts -->
         <script type="text/javascript" src="./js/script.js"></script>
+        <script type="text/javascript" src="./js/pageInteraction.js"></script>
     </head>
     <body>
-        <div id="use-notes">
-            <h2>Usage Notes</h2>
-            <ul>
-                <li>
-                    <i>Input Value</i> field will only accept numerical characters.
-                </li>
-                <li>
-                    <i>Input Value</i> and <i>Rounding Type</i> must contain values to produce output.
-                </li>
-                <li>
-                    Note 3 etc etc.
-                </li>
-            </ul>
+        <div id="topbar">
+            <h1>Decimal-32 Floating Point Converter</h1>
         </div>
-        <div id="in-out">
-            <div id="in-out-left">
-                <h3>Input Value</h3>
-                <input id="inputValue" type="number">
+        <div id="main-body">
+            <div style="height: 32px"></div>
+            <div id="input-area">
+                <h2>Input Value</h2>
+                <input id="input-value" type="number">
             </div>
-            <div id="in-out-middle">
-                <h4>Rounding Type:</h4>
-                <select id="roundMethod">
-                    <option value="default" disabled selected hidden>Select a rounding method</option>
-                    <option value="option1">No rounding (7 digit input)</option>
-                    <option value="option2">Round to nearest even (7+ digit input)</option>
-                    <option value="option3">Option3</option>
-                </select>
+
+            <div id="page-controls">
+                <h3>Rounding Type</h3>
+                <p id="rounding-method">NR</p>
+                <p id="rounding-method-display">No Rounding</p>
+                <div id="rounding-type-buttons">
+                    <button id="round-method-1-btn">
+                        No rounding<br>
+                        (7 digit input)
+                    </button>
+                    <button id="round-method-2-btn">
+                        Round to nearest even<br>
+                        (7+ digit input)
+                    </button>
+                </div>
                 <div id="actionButtons">
                     <i id="convertButton" class="fa-solid fa-angles-right"></i>
                     <i id="resetButton" class="fa-solid fa-arrow-rotate-left"></i>
@@ -58,16 +57,26 @@
                     </span>
                 </div>
             </div>
-            <div id="in-out-right">
-                <h3>Output Value</h3>
-                <input id="outputValue" disabled>
-            </div>
-        </div>
 
-        <div id="stepsArea">
-            <h3>Step-by-step Conversion</h3>
-            <div id="steps">
-                Steps will be printed here
+            <div id="output-area">
+                <h2>Output Value</h2>
+                <div id="output-value"></div>
+            </div>
+            
+            <div id="footer">
+                <h3>Usage Notes</h3>
+                <ul>
+                    <li>
+                        <i>Input Value</i> field will only accept numerical characters.
+                    </li>
+                    <li>
+                        <i>Input Value</i> and <i>Rounding Type</i> must contain values to produce output.
+                    </li>
+                    <li>
+                        Note 3 etc etc.
+                    </li>
+                </ul>
+                <p id="credits">© Aldecoa, Aquino, Bautista, Canicon</p>
             </div>
         </div>
     </body>

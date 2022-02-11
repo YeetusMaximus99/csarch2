@@ -1,11 +1,11 @@
 $(document).ready(function(){
     // Convert input based on selected method
     $('#convertButton').on('click', function() {
-        var inputElement = $('#inputValue');
-        var outputElement = $('#outputValue');
+        var inputElement = $('#input-value');
+        var outputElement = $('#output-value');
 
         var input = $(inputElement).val();
-        var method = $('#roundMethod').find(':selected').val();
+        var method = $('#rounding-method').text();
         var combifield;
         var tempMSD;
         var tempbcd;
@@ -14,10 +14,10 @@ $(document).ready(function(){
         var exp = 0;
         var significand;
        
-        $(outputElement).css('color', 'black');
+        $(outputElement).css('color', 'white');
 
         if (input == '') {
-            $(outputElement).val('No input given.');
+            $(outputElement).text('No input given.');
             $(outputElement).css('color', 'red');
             return;
         }
@@ -68,16 +68,16 @@ $(document).ready(function(){
         tempMSD = significand[0];
         tempbcd = significand.substring(1);
         switch(method) {
-            case "option1":
+            case "NR":
                 console.log(tempbcd);
                 tempbcd = densely_fixer(tempbcd);
                 expcont = get_exponent_continuation(exp);
                 
                 combifield = combination_field(expcont,tempMSD);
                 expcont = expcont.substring(2);
-                $('#outputValue').val(signbit + " " + combifield + " " + expcont + " " + tempbcd)
+                $('#output-value').text(signbit + " " + combifield + " " + expcont + " " + tempbcd)
                 break;
-            case "option2":
+            case "RTNE":
                 console.log('Option2');
                 newSignificand = round_to_nearest_even(significand);
                 tempMSD = newSignificand[0];
@@ -87,35 +87,20 @@ $(document).ready(function(){
                 expcont = get_exponent_continuation(exp);
                 combifield = combination_field(expcont,tempMSD);
                 expcont = expcont.substring(2);
-                $('#outputValue').val(signbit + " " + combifield + " " + expcont + " " + tempbcd);
+                $('#output-value').text(signbit + " " + combifield + " " + expcont + " " + tempbcd);
                 break;
             case "option3":
                 console.log('Option3 case');
                 // Function or lines here
-                $(outputElement).val('Converted value of ' + input + ' here.');
+                $(outputElement).text('Converted value of ' + input + ' here.');
                 break;
             default:
                 console.log('Default case');
-                $(outputElement).val('No rounding method selected.');
+                $(outputElement).text('No rounding method selected.');
                 $(outputElement).css('color', 'red');
         }
     });
 
-    $('#resetButton').on('click', function() {
-        $('#inputValue').val('');
-        $('#outputValue').val('');
-        $('#roundMethod').val('default');
-    });
-
-    // Copy text to clipboard
-    $('#copyButton').on('click', function() {
-        var text = $('#outputValue').val();
-
-        // https://stackoverflow.com/questions/18812948/make-hidden-div-appear-then-fade-away
-        $('.tooltiptext').finish().show().delay(1000).fadeOut("slow");
-
-        navigator.clipboard.writeText(text);
-    });
     /*
     console.log(unsigned_binary(1)); // 1
     console.log(unsigned_binary(-1)); // 11111111111111111111111111111111

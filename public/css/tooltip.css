@@ -1,0 +1,26 @@
+/* Tooltip styling
+    Ref: https://www.w3schools.com/css/css_tooltip.asp */
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    margin: 0px 8px;
+}
+
+/* Tooltip text */
+.tooltiptext {
+    display: none;
+    background-color: rgba(255, 255, 255, 0.911);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: opacity 1s;
+
+    /* Position the tooltip text */
+    position: absolute;
+    top: 24px;
+    left: 32px;
+    z-index: 1;
+}
