@@ -45,7 +45,6 @@ $(document).ready(function(){
         if(signbit == 1){
             significand = significand.substring(1);
             significand = parseInt(significand);
-     
         }
         console.log(significand);
         while(significand.toString().includes('.')){
@@ -74,7 +73,15 @@ $(document).ready(function(){
                 break;
             case "option2":
                 console.log('Option2');
-                // Function or lines here
+                newSignificand = round_to_nearest_even(significand);
+                tempMSD = newSignificand[0];
+                tempbcd = newSignificand.substring(1);
+
+                tempbcd = densely_fixer(tempbcd);
+                expcont = get_exponent_continuation(exp);
+                combifield = combination_field(expcont,tempMSD);
+                expcont = expcont.substring(2);
+                $('#outputValue').val(signbit + " " + combifield + " " + expcont + " " + tempbcd);
                 break;
             case "option3":
                 console.log('Option3');
@@ -214,6 +221,7 @@ function densely_packed(packed){
     
     return bcd;
 }
+
 /*Runs main loop to convert INT into a densely packed BCD
 Param: (Int) number to be converted to densely packed BCD
 Return: Densely packed BCD*/
@@ -263,4 +271,34 @@ function combination_field(exp,sigMSD){
         return "NaN";
     }
     return combifield;
+}
+
+function round_to_nearest_even (significand) {
+    var newSignificand = ''
+    var oldSignificand = significand.toString();
+    var reference = 0;
+
+    if (oldSignificand.length <= 7) {
+        return oldSignificand;
+    } else {
+        for (i = 0; i < 8; i++) {
+            newSignificand += oldSignificand[i];
+        }
+    }
+
+    reference = parseInt(newSignificand[7]);
+    newSignificand = parseInt(newSignificand);
+    newSignificand = (newSignificand - (newSignificand % 10)) / 10;
+
+    switch (reference) {
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9: newSignificand++; break;
+    }
+
+    newSignificand = newSignificand.toString();
+
+    return newSignificand;
 }
