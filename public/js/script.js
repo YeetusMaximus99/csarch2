@@ -67,9 +67,12 @@ $(document).ready(function(){
                 significand = significand.toString();
                 array=significand.split('.');
                 significand = array[0];
+                console.log(array[1]);
+                significand = significand.concat(array[1]);
             }
         }
-        significand = significand.concat(array[1]);
+        
+        
         while(significand.toString().length < 7){
             significand = significand * 10;
             exp = exp - 1;
@@ -85,7 +88,6 @@ $(document).ready(function(){
                 if(significand.length > 7){
                     $('#outputValue').val("Please Input a digit thats less than or equal to 7 digits");
                 }
-                console.log(tempbcd);
                 else{
                 tempbcd = densely_fixer(tempbcd);
                 expcont = get_exponent_continuation(exp);
