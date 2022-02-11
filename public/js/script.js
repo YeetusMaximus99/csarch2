@@ -64,24 +64,28 @@ $(document).ready(function() {
             if(temp < 7){
             significand = significand * 10;
             exp = exp - 1;
+            alert(significand);
             }
             else{
+                alert("else");
                 significand = significand.toString();
                 array = significand.split('.');
                 significand = array[0];
                 console.log(array[1]);
             }
         }
-        
+        significand = significand.toString();
         while(significand.toString().length < 7){
-            significand = significand * 10;
-            exp = exp - 1;
+            significand = '0' + significand;
+            exp = exp + 1;
 
         }
         
         
         /*5.673459e6*/
-        significand = significand.toString();
+        
+        alert(significand);
+        alert(exp);
         tempMSD = significand[0];
         tempbcd = significand.substring(1);
         switch (method) {
