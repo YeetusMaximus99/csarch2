@@ -72,13 +72,18 @@ $(document).ready(function(){
 
         switch(method) {
             case "NR":
+                if(significand.length > 7){
+                    $('#outputValue').val("Please Input a digit thats less than or equal to 7 digits");
+                }
                 console.log(tempbcd);
+                else{
                 tempbcd = densely_fixer(tempbcd);
                 expcont = get_exponent_continuation(exp);
                 
                 combifield = combination_field(expcont,tempMSD);
                 expcont = expcont.substring(2);
-                $(outputElement).text(signbit + " " + combifield + " " + expcont + " " + tempbcd)
+                $(outputElement).text(signbit + " " + combifield + " " + expcont + " " + tempbcd);
+                }
                 break;
                 
             case "RTNE":
