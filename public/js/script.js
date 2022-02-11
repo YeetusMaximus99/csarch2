@@ -25,7 +25,7 @@ $(document).ready(function() {
         console.log(pattern.test(input.toString()));
         if (pattern.test(input.toString())) {
             var array = input.split('e');
-            significand = array[0];
+            significand =array[0];
             console.log(significand);
             exp = parseInt(array[1]);
            
@@ -33,7 +33,7 @@ $(document).ready(function() {
         
         else if (pattern1.test(input.toString())){
             var array = input.split('E');
-            significand = parseInt(array[0]);
+            significand = array[0];
             console.log(array[0]);
             exp = parseInt(array[1]);
          
@@ -47,7 +47,6 @@ $(document).ready(function() {
         signbit = get_sign_bit(input);
         if (signbit == 1) {
             significand = significand.substring(1);
-            significand = parseInt(significand);
 
         }
 
@@ -56,36 +55,48 @@ $(document).ready(function() {
         var i= 0;
         var array;
         var temp;
+        var temp2;
+        temp2 = significand.toString();
+       
+        temp2 = temp2.length - 1;
         exp = parseInt(exp);
+       
         while(significand.toString().includes('.')){
             temp = significand.toString();
             temp = temp.split('.');
             temp = temp[0].length;
-            if(temp < 7){
+            
+            if(temp < temp2){
+            significand = parseFloat(significand);
             significand = significand * 10;
+            significand = significand.toFixed(temp2);
             exp = exp - 1;
-            alert(significand);
+            }
+            else if(temp == temp2 && temp != 7){
+                significand = '0' + significand;
+               
             }
             else{
-                alert("else");
+                
                 significand = significand.toString();
                 array = significand.split('.');
                 significand = array[0];
                 console.log(array[1]);
             }
+            alert(significand);
+            alert(temp);
+            alert(exp);
         }
         significand = significand.toString();
         while(significand.toString().length < 7){
             significand = '0' + significand;
-            exp = exp + 1;
-
+            
         }
         
         
         /*5.673459e6*/
         
-        alert(significand);
-        alert(exp);
+       
         tempMSD = significand[0];
         tempbcd = significand.substring(1);
         switch (method) {
