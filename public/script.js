@@ -17,19 +17,22 @@ $(document).ready(function(){
             return;
         }
         let pattern = /e/;
+        let pattern1 = /E/;
         console.log(pattern.test(input.toString()));
         if (pattern.test(input.toString())){
             var array = input.split('e');
-            significand = parseInt(array[0]);
+            significand = array[0];
+            console.log(significand);
             exp = parseInt(array[1]);
             console.log("exps1");
             console.log(exp);
         }
-        let pattern1 = /E/;
+        
    
-        if (pattern1.test(input.toString())){
+        else if (pattern1.test(input.toString())){
             var array = input.split('E');
             significand = parseInt(array[0]);
+            console.log(array[0]);
             exp = parseInt(array[1]);
             console.log("exps2");
             console.log(exp);
@@ -44,9 +47,10 @@ $(document).ready(function(){
             significand = parseInt(significand);
      
         }
-       
+        console.log(significand);
         while(significand.toString().includes('.')){
             significand = significand * 10;
+            console.log(significand);
             exp = exp - 1;
         }
         while(significand.toString().length < 7){
@@ -54,13 +58,13 @@ $(document).ready(function(){
             exp = exp - 1;
         }
         
-        
+        /*5.673459e6*/
         significand = significand.toString();
         tempMSD = significand[0];
         tempbcd = significand.substring(1);
         switch(method) {
             case "option1":
-                
+                console.log(tempbcd);
                 tempbcd = densely_fixer(tempbcd);
                 expcont = get_exponent_continuation(exp);
                 
