@@ -292,11 +292,9 @@ function round_to_nearest_even (significand) {
             newSignificand += oldSignificand[i];
         }
     }
-
     reference = parseInt(newSignificand[7]);
     newSignificand = parseInt(newSignificand);
     newSignificand = (newSignificand - (newSignificand % 10)) / 10;
-
     switch (reference) {
         case 5:
         case 6:
@@ -304,7 +302,6 @@ function round_to_nearest_even (significand) {
         case 8:
         case 9: newSignificand++; break;
     }
-
     newSignificand = newSignificand.toString();
 
     return newSignificand;
