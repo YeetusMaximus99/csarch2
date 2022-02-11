@@ -1,7 +1,10 @@
 $(document).ready(function(){
     // Convert input based on selected method
     $('#convertButton').on('click', function() {
-        var input = $('#inputValue').val();
+        var inputElement = $('#inputValue');
+        var outputElement = $('#outputValue');
+
+        var input = $(inputElement).val();
         var method = $('#roundMethod').find(':selected').val();
         var combifield;
         var tempMSD;
@@ -11,9 +14,11 @@ $(document).ready(function(){
         var exp = 0;
         var significand;
        
-       
+        $(outputElement).css('color', 'black');
+
         if (input == '') {
-            $('#outputValue').val('No input given.');
+            $(outputElement).val('No input given.');
+            $(outputElement).css('color', 'red');
             return;
         }
         let pattern = /e/;
@@ -73,16 +78,19 @@ $(document).ready(function(){
                 $('#outputValue').val(signbit + " " + combifield + " " + expcont + " " + tempbcd)
                 break;
             case "option2":
-                console.log('Option2');
+                console.log('Option2 case');
                 // Function or lines here
+                $(outputElement).val('Converted value of ' + input + ' here.');
                 break;
             case "option3":
-                console.log('Option3');
+                console.log('Option3 case');
                 // Function or lines here
+                $(outputElement).val('Converted value of ' + input + ' here.');
                 break;
             default:
-                console.log('Default');
-                $('#outputValue').val('No rounding method selected.');
+                console.log('Default case');
+                $(outputElement).val('No rounding method selected.');
+                $(outputElement).css('color', 'red');
         }
     });
 
