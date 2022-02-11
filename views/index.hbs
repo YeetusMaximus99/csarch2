@@ -1,0 +1,74 @@
+<!DOCTYPE html> 
+<html lang="en">
+    <head>
+        <!-- meta information -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <!-- title of webpage -->
+        <title> CSARCH2 </title>
+
+        <!-- css files -->
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+        <!-- Font Awesome icon library -->
+        <script src="https://kit.fontawesome.com/77b56ec5f8.js" crossorigin="anonymous"></script>
+        
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- scripts -->
+        <script type="text/javascript" src="./js/script.js"></script>
+    </head>
+    <body>
+        <div id="use-notes">
+            <h2>Usage Notes</h2>
+            <ul>
+                <li>
+                    <i>Input Value</i> field will only accept numerical characters.
+                </li>
+                <li>
+                    <i>Input Value</i> and <i>Rounding Type</i> must contain values to produce output.
+                </li>
+                <li>
+                    Note 3 etc etc.
+                </li>
+            </ul>
+        </div>
+        <div id="in-out">
+            <div id="in-out-left">
+                <h3>Input Value</h3>
+                <input id="inputValue" type="number">
+            </div>
+            <div id="in-out-middle">
+                <h4>Rounding Type:</h4>
+                <select id="roundMethod">
+                    <option value="default" disabled selected hidden>Select a rounding method</option>
+                    <option value="option1">No rounding (7 digit input)</option>
+                    <option value="option2">Round to nearest even (7+ digit input)</option>
+                    <option value="option3">Option3</option>
+                </select>
+                <div id="actionButtons">
+                    <i id="convertButton" class="fa-solid fa-angles-right"></i>
+                    <i id="resetButton" class="fa-solid fa-arrow-rotate-left"></i>
+                    <span class="tooltip">
+                        <i id="copyButton" class="fa-solid fa-copy tooltip"></i>
+                        <span class="tooltiptext noselect">Result copied!</span>
+                    </span>
+                </div>
+            </div>
+            <div id="in-out-right">
+                <h3>Output Value</h3>
+                <input id="outputValue" disabled>
+            </div>
+        </div>
+
+        <div id="stepsArea">
+            <h3>Step-by-step Conversion</h3>
+            <div id="steps">
+                Steps will be printed here
+            </div>
+        </div>
+    </body>
+</html>
