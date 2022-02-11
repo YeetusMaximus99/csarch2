@@ -20,8 +20,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <!-- scripts -->
-        <script type="text/javascript" src="./js/script.js"></script>
+        <script type="text/javascript" src="./js/converter.js"></script>
         <script type="text/javascript" src="./js/pageInteraction.js"></script>
+        <script type="text/javascript" src="./js/script.js"></script>
     </head>
     <body>
         <div id="topbar">
@@ -36,16 +37,16 @@
 
             <div id="page-controls">
                 <h3>Rounding Type</h3>
-                <p id="rounding-method">NR</p>
-                <p id="rounding-method-display">No Rounding</p>
+                <p id="rounding-method">RTNE</p>
+                <p id="rounding-method-display">Round to Nearest Even</p>
                 <div id="rounding-type-buttons">
-                    <button id="round-method-1-btn">
-                        No rounding<br>
-                        (7 digit input)
-                    </button>
                     <button id="round-method-2-btn">
                         Round to nearest even<br>
                         (7+ digit input)
+                    </button>
+                    <button id="round-method-1-btn">
+                        No rounding<br>
+                        (7 digit input)
                     </button>
                 </div>
                 <div id="actionButtons">

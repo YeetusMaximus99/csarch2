@@ -10,10 +10,10 @@ $(document).ready(function() {
 
     /* Reset fields to default */
     $('#resetButton').on('click', function() {
-        $('#inputValue').val('');
+        $('#input-value').val('');
         $('#output-value').text('');
-        $('#rounding-method').text('NR');
-        $('#rounding-method-display').text('No Rounding');
+        $('#rounding-method').text('RTNE');
+        $('#rounding-method-display').text('Round to Nearest Even');
     });
 
     /* Copy text to clipboard */
