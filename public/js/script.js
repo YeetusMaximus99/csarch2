@@ -61,9 +61,10 @@ $(document).ready(function(){
             significand = significand * 10;
             console.log(significand);
             exp = exp - 1;
-            i++
+            i++;
             }
             else{
+                significand = significand.toString();
                 array=significand.split('.');
                 significand = array[0];
             }
