@@ -13,7 +13,6 @@ $(document).ready(function() {
         var expcont;
         var exp = 0;
         var significand;
-
         $(outputElement).css('color', 'white');
 
         if (input == '') {
@@ -39,11 +38,10 @@ $(document).ready(function() {
             exp = parseInt(array[1]);
          
         }
-
         else{
             significand = input;
         }
-
+        significand = parseInt(significand);
         signbit = get_sign_bit(input);
         if (signbit == 1) {
             significand = significand.substring(1);
