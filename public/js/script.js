@@ -41,7 +41,9 @@ $(document).ready(function() {
         else{
             significand = input;
         }
-        significand = parseInt(significand);
+        
+    
+        significand = significand.toString();
         signbit = get_sign_bit(input);
         if (signbit == 1) {
             significand = significand.substring(1);
@@ -49,7 +51,7 @@ $(document).ready(function() {
 
         }
 
-        
+
 
         var i= 0;
         var array;
@@ -74,15 +76,14 @@ $(document).ready(function() {
         while(significand.toString().length < 7){
             significand = significand * 10;
             exp = exp - 1;
-            
+
         }
         
-       
+        
         /*5.673459e6*/
         significand = significand.toString();
         tempMSD = significand[0];
         tempbcd = significand.substring(1);
-
         switch (method) {
             case "NR":
                 if (significand.length > 7) {

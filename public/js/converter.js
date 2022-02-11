@@ -42,7 +42,6 @@ function packed_bcd(decimal) {
         }
         bcd = bcd + temp;
     }
-    console.log(bcd.toString());
     return bcd.toString();
 }
 
@@ -78,6 +77,7 @@ function densely_packed(packed) {
     bcd[0] = checker[0];
     bcd[1] = checker[1];
     bcd[2] = checker[2];
+  
     if (checker[0] == '0' && checker[1] == '0' && checker[2] == '0') {
         bcd = packed[1] + packed[2] + packed[3] + packed[5] + packed[6] + packed[7] + '0' + packed[9] + packed[10] + packed[11];
     } else if (checker[0] == '0' && checker[1] == '0' && checker[2] == '1') {
