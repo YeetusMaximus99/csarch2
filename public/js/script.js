@@ -25,24 +25,21 @@ $(document).ready(function() {
         console.log(pattern.test(input.toString()));
         if (pattern.test(input.toString())) {
             var array = input.split('e');
-            significand =array[0];
+            significand = array[0];
             console.log(significand);
             exp = parseInt(array[1]);
-           
-        }
-        
-        else if (pattern1.test(input.toString())){
+
+        } else if (pattern1.test(input.toString())) {
             var array = input.split('E');
             significand = array[0];
             console.log(array[0]);
             exp = parseInt(array[1]);
-         
-        }
-        else{
+
+        } else {
             significand = input;
         }
-        
-    
+
+
         significand = significand.toString();
         signbit = get_sign_bit(input);
         if (signbit == 1) {
@@ -52,32 +49,30 @@ $(document).ready(function() {
 
 
 
-        var i= 0;
+        var i = 0;
         var array;
         var temp;
         var temp2;
         temp2 = significand.toString();
-       
+
         temp2 = temp2.length - 1;
         exp = parseInt(exp);
-       
-        while(significand.toString().includes('.')){
+
+        while (significand.toString().includes('.')) {
             temp = significand.toString();
             temp = temp.split('.');
             temp = temp[0].length;
-            
-            if(temp < temp2){
-            significand = parseFloat(significand);
-            significand = significand * 10;
-            significand = significand.toFixed(temp2);
-            exp = exp - 1;
-            }
-            else if(temp == temp2 && temp != 7){
+
+            if (temp < temp2) {
+                significand = parseFloat(significand);
+                significand = significand * 10;
+                significand = significand.toFixed(temp2);
+                exp = exp - 1;
+            } else if (temp == temp2 && temp != 7) {
                 significand = '0' + significand;
-               
-            }
-            else{
-                
+
+            } else {
+
                 significand = significand.toString();
                 array = significand.split('.');
                 significand = array[0];
@@ -85,15 +80,15 @@ $(document).ready(function() {
             }
         }
         significand = significand.toString();
-        while(significand.toString().length < 7){
+        while (significand.toString().length < 7) {
             significand = '0' + significand;
-            
+
         }
-        
-        
+
+
         /*5.673459e6*/
-        
-       
+
+
         tempMSD = significand[0];
         tempbcd = significand.substring(1);
         switch (method) {
@@ -108,9 +103,15 @@ $(document).ready(function() {
                     console.log("e' = " + expcont); //<===
                     combifield = combination_field(expcont, tempMSD);
                     console.log("combi = " + combifield); //<===
-                    expcont = expcont.substring(2);
-                    console.log("exp cont. = " + expcont); //<===
-                    $(outputElement).text(signbit + " " + combifield + " " + expcont + " " + tempbcd);
+                    if (combifield.localeCompare("Infinity") == 0) {
+                        $(outputElement).text("Infinity");
+                    } else if (combifield.localeCompare("NaN") == 0) {
+                        $(outputElement).text("NaN");
+                    } else {
+                        expcont = expcont.substring(2);
+                        console.log("exp cont. = " + expcont); //<===
+                        $(outputElement).text(signbit + " " + combifield + " " + expcont + " " + tempbcd);
+                    }
                 }
                 break;
 
@@ -127,9 +128,15 @@ $(document).ready(function() {
                 console.log("e' = " + expcont); //<===
                 combifield = combination_field(expcont, tempMSD);
                 console.log("combi = " + combifield); //<===
-                expcont = expcont.substring(2);
-                console.log("exp cont. = " + expcont); //<===
-                $(outputElement).text(signbit + " " + combifield + " " + expcont + " " + tempbcd);
+                if (combifield.localeCompare("Infinity") == 0) {
+                    $(outputElement).text("Infinity");
+                } else if (combifield.localeCompare("NaN") == 0) {
+                    $(outputElement).text("NaN");
+                } else {
+                    expcont = expcont.substring(2);
+                    console.log("exp cont. = " + expcont); //<===
+                    $(outputElement).text(signbit + " " + combifield + " " + expcont + " " + tempbcd);
+                }
                 break;
 
             default:
