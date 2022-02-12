@@ -117,7 +117,7 @@ $(document).ready(function() {
 
             case "RTNE":
                 console.log('Option2');
-                newSignificand = round_to_nearest_even(significand);
+                newSignificand = round_to_nearest_even(parseInt(significand));
                 tempMSD = newSignificand[0];
                 tempbcd = newSignificand.substring(1);
 
