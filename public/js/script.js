@@ -83,9 +83,6 @@ $(document).ready(function() {
                 significand = array[0];
                 console.log(array[1]);
             }
-            alert(significand);
-            alert(temp);
-            alert(exp);
         }
         significand = significand.toString();
         while(significand.toString().length < 7){
