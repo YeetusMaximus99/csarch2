@@ -20,6 +20,16 @@ body {
                                     supported by Chrome, Edge, Opera and Firefox */
 }
 
+.math {
+    font-family: 'Courier New', sans-serif;
+    font-style: italic;
+}
+
+.param {
+    font-family: 'Consolas', sans-serif;
+    font-weight: bold;
+}
+
 h1, h2, h3, h4, p {
     margin: 0;
 }
@@ -135,10 +145,24 @@ i:hover {
     color: white;
 }
 
-#output-value {
+#output-value, #output-value-hex {
     margin-top: 24px;
     font-family: 'Consolas';
     font-size: 32px;
+    margin-bottom: 8px;
+}
+
+#output-value-hex {
+    display: none;
+}
+
+#toggle-hex-btn, #toggle-binary-btn {
+    display: none;
+    font-size: 20px;
+}
+
+#toggle-hex-btn:hover, #toggle-binary-btn:hover {
+    cursor: pointer;
 }
 
 

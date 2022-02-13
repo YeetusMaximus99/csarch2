@@ -14,6 +14,7 @@ $(document).ready(function() {
         var exp = 0;
         var significand;
         $(outputElement).css('color', 'white');
+        $('#toggle-hex-btn').hide();
 
         if (input == '') {
             $(outputElement).text('No input given.');
@@ -94,7 +95,8 @@ $(document).ready(function() {
         switch (method) {
             case "NR":
                 if (significand.length > 7) {
-                    $('#outputValue').val("Please Input a digit thats less than or equal to 7 digits");
+                    $(outputElement).text("Input greater than 7 digits.");
+                    $(outputElement).css('color', 'red');
                 } else {
                     console.log(tempbcd);
                     console.log("sign = " + signbit); //<===
@@ -112,6 +114,8 @@ $(document).ready(function() {
                         console.log("exp cont. = " + expcont); //<===
                         $(outputElement).text(signbit + " " + combifield + " " + expcont + " " + tempbcd);
                     }
+                    $('#output-value-hex').text(binaryToHex($(outputElement).text().replaceAll(' ', '')));
+                    $('#toggle-hex-btn').show();
                 }
                 break;
 
@@ -137,6 +141,8 @@ $(document).ready(function() {
                     console.log("exp cont. = " + expcont); //<===
                     $(outputElement).text(signbit + " " + combifield + " " + expcont + " " + tempbcd);
                 }
+                $('#output-value-hex').text(binaryToHex($(outputElement).text().replaceAll(' ', '')));
+                $('#toggle-hex-btn').show();
                 break;
 
             default:
@@ -146,3 +152,32 @@ $(document).ready(function() {
         }
     });
 });
+
+const hexMap = {
+    '0000' : '0',
+    '0001' : '1',
+    '0010' : '2',
+    '0011' : '3',
+    '0100' : '4',
+    '0101' : '5',
+    '0110' : '6',
+    '0111' : '7',
+    '1000' : '8',
+    '1001' : '9',
+    '1010' : 'A',
+    '1011' : 'B',
+    '1100' : 'C',
+    '1101' : 'D',
+    '1110' : 'E',
+    '1111' : 'F',
+};
+
+function binaryToHex(input) {
+    var hex = '';
+
+    for(var i = input.length - 4; i >= 0; i -= 4) {
+        var temp = input.slice(i, i + 4);
+        hex = hexMap[temp] + hex;
+    }
+    return hex;
+}

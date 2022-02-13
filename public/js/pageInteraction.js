@@ -25,4 +25,21 @@ $(document).ready(function() {
 
         navigator.clipboard.writeText(text);
     });
+
+    $('#toggle-hex-btn').on('click', function() {
+        $('#output-value').hide();
+        $('#toggle-hex-btn').hide();
+
+        $('#output-value-hex').show();
+        $('#toggle-binary-btn').show();
+        
+    });
+
+    $('#toggle-binary-btn').on('click', function() {
+        $('#output-value').show();
+        $('#output-value-hex').hide();
+
+        $('#toggle-hex-btn').show();
+        $('#toggle-binary-btn').hide();
+    });
 });

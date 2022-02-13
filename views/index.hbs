@@ -62,19 +62,25 @@
             <div id="output-area">
                 <h2>Output Value</h2>
                 <div id="output-value"></div>
+                <div id="output-value-hex"></div>
+                <p id="toggle-hex-btn"><b><u>View in Hex</u></b></p>
+                <p id="toggle-binary-btn"><b><u>View in Binary</u></b></p>
             </div>
             
             <div id="footer">
                 <h3>Usage Notes</h3>
                 <ul>
                     <li>
-                        <i>Input Value</i> field will only accept numerical characters.
+                        <span class="param">Input Value</span> field will only accept numerical characters.
                     </li>
                     <li>
-                        <i>Input Value</i> and <i>Rounding Type</i> must contain values to produce output.
+                        <span class="param">Input Value</span> and <span class="param">Rounding Type</span> must contain values to produce output.
                     </li>
                     <li>
-                        Note 3 etc etc.
+                        Exponential input can be represented using <span class="math"> e    </span> instead of <span class="math"> x10ˣ</span>.
+                    </li>
+                    <li>
+                        <span class="param">No Rounding</span> will only accept values up to 7 digits long.
                     </li>
                 </ul>
                 <p id="credits">© Aldecoa, Aquino, Bautista, Canicon</p>
