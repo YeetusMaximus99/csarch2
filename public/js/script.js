@@ -58,34 +58,56 @@ $(document).ready(function() {
 
         temp2 = temp2.length - 1;
         exp = parseInt(exp);
+        console.log("len = " + significand.toString().split('.').join("").length);
+        if (significand.toString().split('.').join("").length <= 7) {
+            while (significand.toString().includes('.')) {
+                temp = significand.toString();
+                temp = temp.split('.');
+                temp = temp[0].length;
 
-        while (significand.toString().includes('.')) {
-            temp = significand.toString();
-            temp = temp.split('.');
-            temp = temp[0].length;
+                if (temp < temp2) {
+                    significand = parseFloat(significand);
+                    significand = significand * 10;
+                    significand = significand.toFixed(temp2);
+                    exp = exp - 1;
+                } else if (temp == temp2 && temp != 7) {
+                    significand = '0' + significand;
 
-            if (temp < temp2) {
-                significand = parseFloat(significand);
-                significand = significand * 10;
-                significand = significand.toFixed(temp2);
-                exp = exp - 1;
-            } else if (temp == temp2 && temp != 7) {
+                } else {
+
+                    significand = significand.toString();
+                    array = significand.split('.');
+                    significand = array[0];
+                    console.log(array[1]);
+                }
+                console.log("significand = " + significand)
+            }
+            significand = significand.toString();
+            while (significand.toString().length < 7) {
                 significand = '0' + significand;
 
-            } else {
-
-                significand = significand.toString();
-                array = significand.split('.');
-                significand = array[0];
-                console.log(array[1]);
             }
+        } else {
+            console.log("I here");
+            temp = significand.toString().split('.');
+            //temp = temp[0]
+            while (temp[0].length < 7) {
+                significand *= 10;
+                temp = significand.toString().split('.');
+                exp -= 1;
+                //temp = temp[0]
+                console.log("templen1 = " + temp[0].length);
+            }
+            while (temp[0].length > 7) {
+                significand /= 10;
+                temp = significand.toString().split('.');
+                exp += 1;
+                console.log("templen2 = " + temp[0].length);
+            }
+            console.log("I here");
+            significand = "0" + significand.toString() * 10
+            console.log("significand = " + significand);
         }
-        significand = significand.toString();
-        while (significand.toString().length < 7) {
-            significand = '0' + significand;
-
-        }
-
 
         /*5.673459e6*/
 
@@ -121,9 +143,16 @@ $(document).ready(function() {
 
             case "RTNE":
                 console.log('Option2');
+
                 newSignificand = round_to_nearest_even(parseInt(significand));
                 tempMSD = newSignificand[0];
-                tempbcd = newSignificand.substring(1);
+                tempbcd = newSignificand.substring(1).split('.');
+                // newSignificand = significand.substring(0, 9)
+                //newSignificand = Math.round(parseFloat(newSignificand) / 2) * 2
+                //newSignificand = newSignificand.toString();
+                console.log("newSignificand = " + newSignificand); //<===
+                tempbcd = tempbcd[0];
+                console.log("tempbcd = " + tempbcd); //<===
 
                 console.log(tempbcd);
                 console.log("sign = " + signbit); //<===
@@ -154,28 +183,28 @@ $(document).ready(function() {
 });
 
 const hexMap = {
-    '0000' : '0',
-    '0001' : '1',
-    '0010' : '2',
-    '0011' : '3',
-    '0100' : '4',
-    '0101' : '5',
-    '0110' : '6',
-    '0111' : '7',
-    '1000' : '8',
-    '1001' : '9',
-    '1010' : 'A',
-    '1011' : 'B',
-    '1100' : 'C',
-    '1101' : 'D',
-    '1110' : 'E',
-    '1111' : 'F',
+    '0000': '0',
+    '0001': '1',
+    '0010': '2',
+    '0011': '3',
+    '0100': '4',
+    '0101': '5',
+    '0110': '6',
+    '0111': '7',
+    '1000': '8',
+    '1001': '9',
+    '1010': 'A',
+    '1011': 'B',
+    '1100': 'C',
+    '1101': 'D',
+    '1110': 'E',
+    '1111': 'F',
 };
 
 function binaryToHex(input) {
     var hex = '';
 
-    for(var i = input.length - 4; i >= 0; i -= 4) {
+    for (var i = input.length - 4; i >= 0; i -= 4) {
         var temp = input.slice(i, i + 4);
         hex = hexMap[temp] + hex;
     }
