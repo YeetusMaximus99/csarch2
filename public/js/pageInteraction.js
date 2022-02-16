@@ -7,6 +7,10 @@ $(document).ready(function() {
         $('#rounding-method-display').text('Round to Nearest Even');
         $('#rounding-method').text('RTNE');
     });
+    $('#round-method-3-btn').on('click', function() {
+        $('#rounding-method-display').text('Truncate');
+        $('#rounding-method').text('Truncate');
+    });
 
     /* Reset fields to default */
     $('#resetButton').on('click', function() {
@@ -32,7 +36,7 @@ $(document).ready(function() {
 
         $('#output-value-hex').show();
         $('#toggle-binary-btn').show();
-        
+
     });
 
     $('#toggle-binary-btn').on('click', function() {

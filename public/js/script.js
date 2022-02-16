@@ -142,7 +142,7 @@ $(document).ready(function() {
                 break;
 
             case "RTNE":
-                console.log('Option2');
+                console.log('Option3');
 
                 newSignificand = round_to_nearest_even(parseInt(significand));
                 tempMSD = newSignificand[0];
@@ -173,6 +173,35 @@ $(document).ready(function() {
                 $('#output-value-hex').text(binaryToHex($(outputElement).text().replaceAll(' ', '')));
                 $('#toggle-hex-btn').show();
                 break;
+
+            case "Truncate":
+                console.log('Option3');
+
+                //significand = significand.substring(0, 8)
+                tempMSD = significand[1];
+                tempbcd = significand.substring(2, 8)
+                console.log("tempbcd = " + tempbcd); //<===
+
+                console.log(tempbcd);
+                console.log("sign = " + signbit); //<===
+                tempbcd = densely_fixer(tempbcd);
+                expcont = get_exponent_continuation(exp);
+                console.log("e' = " + expcont); //<===
+                combifield = combination_field(expcont, tempMSD);
+                console.log("combi = " + combifield); //<===
+                if (combifield.localeCompare("Infinity") == 0) {
+                    $(outputElement).text("Infinity");
+                } else if (combifield.localeCompare("NaN") == 0) {
+                    $(outputElement).text("NaN");
+                } else {
+                    expcont = expcont.substring(2);
+                    console.log("exp cont. = " + expcont); //<===
+                    $(outputElement).text(signbit + " " + combifield + " " + expcont + " " + tempbcd);
+                }
+                $('#output-value-hex').text(binaryToHex($(outputElement).text().replaceAll(' ', '')));
+                $('#toggle-hex-btn').show();
+                break;
+
 
             default:
                 console.log('Default case');
