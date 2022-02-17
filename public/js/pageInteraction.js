@@ -11,6 +11,14 @@ $(document).ready(function() {
         $('#rounding-method-display').text('Truncate');
         $('#rounding-method').text('Truncate');
     });
+    $('#round-method-4-btn').on('click', function() {
+        $('#rounding-method-display').text('Ceiling');
+        $('#rounding-method').text('Ceiling');
+    });
+    $('#round-method-5-btn').on('click', function() {
+        $('#rounding-method-display').text('Floor');
+        $('#rounding-method').text('Floor');
+    });
 
     /* Reset fields to default */
     $('#resetButton').on('click', function() {

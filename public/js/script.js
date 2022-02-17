@@ -174,12 +174,82 @@ $(document).ready(function() {
                 $('#toggle-hex-btn').show();
                 break;
 
-            case "Truncate":
+            case "Truncate": //LAGYABN NG DISTINCTION BETWEEN SIGNS
                 console.log('Option3');
 
                 //significand = significand.substring(0, 8)
                 tempMSD = significand[1];
                 tempbcd = significand.substring(2, 8)
+                console.log("tempbcd = " + tempbcd); //<===
+
+                console.log(tempbcd);
+                console.log("sign = " + signbit); //<===
+                tempbcd = densely_fixer(tempbcd);
+                expcont = get_exponent_continuation(exp);
+                console.log("e' = " + expcont); //<===
+                combifield = combination_field(expcont, tempMSD);
+                console.log("combi = " + combifield); //<===
+                if (combifield.localeCompare("Infinity") == 0) {
+                    $(outputElement).text("Infinity");
+                } else if (combifield.localeCompare("NaN") == 0) {
+                    $(outputElement).text("NaN");
+                } else {
+                    expcont = expcont.substring(2);
+                    console.log("exp cont. = " + expcont); //<===
+                    $(outputElement).text(signbit + " " + combifield + " " + expcont + " " + tempbcd);
+                }
+                $('#output-value-hex').text(binaryToHex($(outputElement).text().replaceAll(' ', '')));
+                $('#toggle-hex-btn').show();
+                break;
+
+            case "Ceiling":
+                console.log('Option4');
+
+                //significand = significand.substring(0, 8)
+                if (signbit == 0)
+                    newSignificand = (Math.ceil(parseFloat(significand) / 10)).toString();
+                else {
+                    newSignificand = (Math.ceil(parseFloat(significand) / -10)).toString();
+                    newSignificand = newSignificand.replace('-', '');
+                }
+                console.log("newSignificand = " + newSignificand); //<===
+                tempMSD = newSignificand[0];
+                tempbcd = newSignificand.substring(1, 7)
+                console.log("tempbcd = " + tempbcd); //<===
+
+                console.log(tempbcd);
+                console.log("sign = " + signbit); //<===
+                tempbcd = densely_fixer(tempbcd);
+                expcont = get_exponent_continuation(exp);
+                console.log("e' = " + expcont); //<===
+                combifield = combination_field(expcont, tempMSD);
+                console.log("combi = " + combifield); //<===
+                if (combifield.localeCompare("Infinity") == 0) {
+                    $(outputElement).text("Infinity");
+                } else if (combifield.localeCompare("NaN") == 0) {
+                    $(outputElement).text("NaN");
+                } else {
+                    expcont = expcont.substring(2);
+                    console.log("exp cont. = " + expcont); //<===
+                    $(outputElement).text(signbit + " " + combifield + " " + expcont + " " + tempbcd);
+                }
+                $('#output-value-hex').text(binaryToHex($(outputElement).text().replaceAll(' ', '')));
+                $('#toggle-hex-btn').show();
+                break;
+
+            case "Floor":
+                console.log('Option5');
+
+                //significand = significand.substring(0, 8)
+                if (signbit == 0)
+                    newSignificand = (Math.floor(parseFloat(significand) / 10)).toString();
+                else {
+                    newSignificand = (Math.floor(parseFloat(significand) / -10)).toString();
+                    newSignificand = newSignificand.replace('-', '');
+                }
+                console.log("newSignificand = " + newSignificand); //<===
+                tempMSD = newSignificand[0];
+                tempbcd = newSignificand.substring(1, 7)
                 console.log("tempbcd = " + tempbcd); //<===
 
                 console.log(tempbcd);
